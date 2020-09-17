@@ -1,7 +1,6 @@
 {% load socialaccount %}
 {% providers_media_js %}
 
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -19,18 +18,19 @@
                   appId      : '3168204459867563',
                   cookie     : true,
                   xfbml      : true,
-                  version    : 'v6.0'
+                  version    : 'v7.0'
                 });
                 FB.AppEvents.logPageView();
               };
 
-              (function(d, s, id){
+               (function(d, s, id){
                  var js, fjs = d.getElementsByTagName(s)[0];
                  if (d.getElementById(id)) {return;}
                  js = d.createElement(s); js.id = id;
                  js.src = "https://connect.facebook.net/en_US/sdk.js";
                  fjs.parentNode.insertBefore(js, fjs);
                }(document, 'script', 'facebook-jssdk'));
+
 
             function statusChangeCallback(response) {
                  if (response.status === 'connected') {
@@ -48,21 +48,18 @@
             }
 
             function testAPI() {
-                console.log('Welcome!  Fetching your information.... ');
-                FB.api('me/friends?fields=friends.limit(10){access_code,account_claim_time,first_name}', function(response){
-                    console.log(response);
-                }, {scope: 'user_friends'});
-
-<!--                FB.api('/me/friends', function(response){-->
+<!--                console.log('Welcome!  Fetching your information.... ');-->
+<!--                console.log('Welcome!  Fetching your information.... ');-->
+<!--                FB.api('me/friends?fields=friends.limit(10){access_code,account_claim_time,first_name}', function(response){-->
 <!--                    console.log(response);-->
 <!--                }, {scope: 'user_friends'});-->
 
-<!--                FB.api('me?fields=likes.limit(10){picture,fan_count,link,name},name,id', function(response) {-->
-<!--                  if(response){-->
-<!--                    console.log(response);-->
-<!--                    percorrePagina(response);-->
-<!--                  }-->
-<!--                });-->
+                FB.api('me?fields=likes.limit(10){picture,fan_count,link,name},name,id', function(response) {
+                  if(response){
+                    console.log(response);
+                    percorrePagina(response);
+                  }
+                });
             }
 
             function percorrePagina(paginas){
@@ -85,7 +82,7 @@
         <h1> #ForaCovid19 </h1>
         <h1> #LITmaiorLabDoMundo </h1>
 
-        <fb:login-button scope="public_profile,email, user_likes" onlogin="checkLoginState();"> </fb:login-button>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
         <a href="{% provider_login_url 'facebook' method='js_sdk' %}">Amigos de Amigos</a>
         <div id="paginas"></div>
     </body>
